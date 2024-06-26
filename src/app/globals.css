@@ -1,33 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #ffffff;
+  background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Hide default date and time input icons */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Cosmic background animations */
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes move-background {
+  from {
+    transform: translate3d(0px, 0px, 0px);
   }
+  to { 
+    transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(-5vw) translateY(105vh) rotate(-45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(105vw) translateY(-5vh) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+.stars, .twinkling, .clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stars {
+  background: #000 url('http://www.script-tutorials.com/demos/360/images/stars.png') repeat top center;
+  z-index: 0;
+}
+
+.twinkling {
+  background: transparent url('http://www.script-tutorials.com/demos/360/images/twinkling.png') repeat top center;
+  z-index: 1;
+  animation: move-background 70s linear infinite;
+}
+
+.clouds {
+  background: transparent url('http://www.script-tutorials.com/demos/360/images/clouds3.png') repeat top center;
+  z-index: 2;
+  opacity: .4;
+  animation: move-background 150s linear infinite;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+  animation: shooting 5s linear infinite;
+}
+
+/* Custom styles for input fields */
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  color: white;
+  pointer-events: none;
+}
+
+.input-with-icon {
+  padding-left: 35px;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
